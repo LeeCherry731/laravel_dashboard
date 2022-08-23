@@ -65,7 +65,15 @@
                     <td class="border px-4 py-2">{{$user->email}}</td>
                     <td class="border px-4 py-2">{{$user->role == 0? 'admin' : 'user'}}</td>
                     <td class="border px-4 py-2">{{$user->coin}}</td>
-                    <td class="border px-4 py-2">Edit Delete</td>
+                    <td class="border px-4 py-2">
+
+                        <x-jet-button wire:click="confirmUserEdit({{$user->id}})" class="bg-sky-600 hover:bg-sky-700" wire:loading.attr="disabled">
+                        Edit
+                         </x-jet-button>
+                        <x-jet-danger-button wire:click="confirmUserDeletion({{$user->id}})" wire:loading.attr="disabled">
+                        Delete
+                         </x-jet-danger-button>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -76,4 +84,23 @@
         {{$users->links()}}
     </div>
 
+            <x-jet-dialog-modal wire:model="confirmingUserDeletion">
+            <x-slot name="title">
+                {{ __('Delete Account') }}
+            </x-slot>
+
+            <x-slot name="content">
+                {{ __('Are you sure you want to delete this account?') }}
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$set('confirmingUserDeletion',false)" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-jet-secondary-button>
+
+                <x-jet-danger-button class="ml-3" wire:click="deleteUser({{ $confirmingUserDeletion}})" wire:loading.attr="disabled">
+                    {{ __('Delete Account') }}
+                </x-jet-danger-button>
+            </x-slot>
+        </x-jet-dialog-modal>
 </div>

@@ -16,6 +16,8 @@ class Users extends Component
     public $sortAsc = true;
 
 
+    public $confirmingUserDeletion = false;
+
     protected $queryString = [
         'q'=>['except'=> ''],
         'sortBy'=>'id',
@@ -49,5 +51,14 @@ class Users extends Component
     {
         if($this->sortBy == $field) return $this->sortAsc = !$this->sortAsc;
         return $this->sortBy = $field;
+    }
+
+    public function confirmUserDeletion($id){
+        $this->confirmingUserDeletion = $id;
+    }
+
+    public function deleteUser(User $user){
+        $user->delete();
+        $this->confirmingUserDeletion = false;
     }
 }
