@@ -30,8 +30,8 @@ class Users extends Component
                     $query->where('name', 'like', '%' . $this->q . '%')
                         ->orWhere('email', 'like', '%' . $this->q . '%')
                         ->orWhere('id', 'like', '%' . $this->q . '%');
-                })->orderBy($this->sortBy, $this->sortAsc?'ASC' : 'DESC');
-        });
+                });
+        })->orderBy($this->sortBy, $this->sortAsc?'ASC' : 'DESC');
 
         $users = $users->paginate(10);
 
@@ -43,5 +43,11 @@ class Users extends Component
 
     public function updatingActive() {
         $this->resetPage();
+    }
+
+    public function sortBy($field)
+    {
+        if($this->sortBy == $field) return $this->sortAsc = !$this->sortAsc;
+        return $this->sortBy = $field;
     }
 }

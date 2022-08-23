@@ -16,19 +16,41 @@
             <thead>
                 <tr>
                     <th class="px-4 py-2">
-                        <div class="flex items-center">ID</div>
+                        <div class="flex items-center">
+                            <button wire:click="sortBy('id')">
+                            ID
+                            <x-sort-icon sortField="id" :sort-by="$sortBy" :sort-asc="$sortAsc"/>
+                            </button>
+
+
+                        </div>
                     </th>
                     <th class="px-4 py-2">
-                        <div class="flex items-center">Name</div>
+                        <div class="flex items-center">
+                            <button wire:click="sortBy('name')">
+                            Name
+
+                            <x-sort-icon sortField="name" :sort-by="$sortBy" :sort-asc="$sortAsc"/>
+                            </button></div>
                     </th>
                     <th class="px-4 py-2">
-                        <div class="flex items-center">Email</div>
+                        <div class="flex items-center">
+                            <button wire:click="sortBy('email')">
+                            Email
+
+                                <x-sort-icon sortField="email" :sort-by="$sortBy" :sort-asc="$sortAsc"/>
+                            </button></div>
                     </th>
                     <th class="px-4 py-2">
                         <div class="flex items-center">Role</div>
                     </th>
                     <th class="px-4 py-2">
-                        <div class="flex items-center">Coin</div>
+                        <div class="flex items-center">
+                            <button wire:click="sortBy('coin')">
+                            Coin
+
+                                <x-sort-icon sortField="coin" :sort-by="$sortBy" :sort-asc="$sortAsc"/>
+                            </button></div>
                     </th>
                     <th class="px-4 py-2">
                         Actions
