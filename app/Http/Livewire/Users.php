@@ -14,14 +14,21 @@ class Users extends Component
     public $q;
     public $sortBy = 'id';
     public $sortAsc = true;
-
+    public $user;
 
     public $confirmingUserDeletion = false;
+    public $confirmingUserEdit = false;
 
     protected $queryString = [
         'q'=>['except'=> ''],
         'sortBy'=>'id',
         'sortAsc'=>true,
+    ];
+
+    protected $rules = [
+        'user.name' => 'required|string|min:4',
+        'user.email' => 'required|email',
+        'user.coin' => 'required|numeric|between:0,1000000',
     ];
 
     public function render()
@@ -59,6 +66,21 @@ class Users extends Component
 
     public function deleteUser(User $user){
         $user->delete();
+        session()->flash('message', 'User delete successfully');
         $this->confirmingUserDeletion = false;
     }
+
+    public function confirmUserEdit(User $user){
+        $this->user = $user;
+        $this->confirmingUserEdit = true;
+    }
+
+    public function saveUser(){
+        $this->validate();
+        $this->user->save();
+        session()->flash('message', 'User saved successfully');
+        $this->confirmingUserEdit = false;
+    }
+
+
 }

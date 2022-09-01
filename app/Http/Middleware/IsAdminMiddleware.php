@@ -18,8 +18,8 @@ class IsAdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         // dd(auth());
-        if(Auth::user()->role === 1) {
-            return redirect("/");
+        if(!auth()->check() || !auth()->user()->role == 0) {
+            abort(403);
         }
         return $next($request);
     }

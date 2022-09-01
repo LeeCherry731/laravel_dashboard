@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Item;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,20 +17,44 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+// Route::get('/add', function () {
+//         $item = new Item();
+//         $item->name = 'lee';
+//         $item->coin = 500;
+//         $item->price = 400;
+//         $item->save();
+// });
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    'isAdmin'
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/items', function () {
+
+    Route::middleware(['can:access-admin'])
+        ->group(function () {
+        Route::get('/items', function () {
         return view('items');
-    })->name('items');
-    Route::get('/users', function () {
-        return view('users');
-    })->name('users');
+        })->name('items');
+        Route::get('/users', function () {
+            return view('users');
+        })->name('users');
 });
+});
+
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified',
+//     'isAdmin'
+// ])->group(function () {
+//     Route::get('/items', function () {
+//         return view('items');
+//     })->name('items');
+//     Route::get('/users', function () {
+//         return view('users');
+//     })->name('users');
+// });

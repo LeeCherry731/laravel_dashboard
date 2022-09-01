@@ -61,7 +61,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function items() {
-        return $this->hasMany(Item::class);
+    public function isAdmin()
+    {
+        return auth()->user()->role == 0;
     }
 }

@@ -18,9 +18,9 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(),
             'name' => $this->faker->word(),
             'price' => $this->faker->randomNumber(3),
+            'coin' => $this->faker->randomNumber(3),
         ];
     }
 }

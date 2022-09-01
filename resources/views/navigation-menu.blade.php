@@ -15,12 +15,15 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('items') }}" :active="request()->routeIs('items')">
-                        {{ __('Items') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
-                        {{ __('Users') }}
-                    </x-jet-nav-link>
+                    {{-- @if (auth()->user()->isAdmin()) --}}
+                    @can('access-admin')
+                        <x-jet-nav-link href="{{ route('items') }}" :active="request()->routeIs('items')">
+                            {{ __('Items') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
+                            {{ __('Users') }}
+                        </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -146,12 +149,15 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('items') }}" :active="request()->routeIs('items')">
-                {{ __('Items') }}
-            </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
-                {{ __('Users') }}
-            </x-jet-responsive-nav-link>
+            {{-- @if (auth()->user()->isAdmin()) --}}
+            @can('access-admin')
+                <x-jet-responsive-nav-link href="{{ route('items') }}" :active="request()->routeIs('items')">
+                    {{ __('Items') }}
+                </x-jet-responsive-nav-link>
+                <x-jet-responsive-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
+                    {{ __('Users') }}
+                </x-jet-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->

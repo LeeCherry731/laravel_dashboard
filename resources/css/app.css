@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-blue-css {
+    background: rgb(31, 210, 255);
+}

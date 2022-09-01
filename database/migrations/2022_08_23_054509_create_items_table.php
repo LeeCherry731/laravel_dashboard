@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->index();
             $table->string('name');
             $table->float('price', 8, 2);
+            $table->float('coin', 8, 2);
             $table->timestamps();
         });
     }
